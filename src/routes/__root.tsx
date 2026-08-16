@@ -11,6 +11,11 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { PlayerProvider } from "@/components/player/PlayerProvider";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { StickyPlayer } from "@/components/StickyPlayer";
+import { FloatingActions } from "@/components/FloatingActions";
 
 function NotFoundComponent() {
   return (
@@ -44,9 +49,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
+        <h1 className="text-xl font-semibold tracking-tight text-foreground">This page didn't load</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Something went wrong on our end. You can try refreshing or head back home.
         </p>
@@ -77,21 +80,55 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { name: "theme-color", content: "#E01B22" },
+      { title: "Bus Radio 99.9FM — Sauti ya Kajiado" },
+      {
+        name: "description",
+        content:
+          "Bus Radio 99.9FM, Sauti ya Kajiado — community radio from Kajiado Town broadcasting in Kiswahili and Maa. Listen live online.",
+      },
+      { name: "author", content: "Bus Radio 99.9FM" },
+      { property: "og:site_name", content: "Bus Radio 99.9FM" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "manifest", href: "/manifest.webmanifest" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter+Tight:wght@400;500;600;700&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "RadioStation",
+          name: "Bus Radio 99.9FM",
+          alternateName: "Sauti ya Kajiado",
+          slogan: "Sauti ya Kajiado",
+          broadcastFrequency: "99.9 FM",
+          inLanguage: ["sw", "mas"],
+          telephone: "+254720939088",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Sampu Villa, off Namanga Road",
+            addressLocality: "Kajiado",
+            addressCountry: "KE",
+          },
+          sameAs: [
+            "https://www.youtube.com/@BusRadioKajiado254",
+            "https://www.facebook.com/SautiyaCounty034/",
+            "https://zeno.fm/radio/bus-radio-99-9fm/",
+            "https://onlineradiobox.com/ke/bus/",
+          ],
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -119,8 +156,16 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <PlayerProvider>
+        <Navbar />
+        <main className="min-h-screen">
+          {/* Required: nested routes render here. */}
+          <Outlet />
+        </main>
+        <Footer />
+        <StickyPlayer />
+        <FloatingActions />
+      </PlayerProvider>
     </QueryClientProvider>
   );
 }
