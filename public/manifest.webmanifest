@@ -1,0 +1,9 @@
+{
+  "name": "Bus Radio 99.9FM — Sauti ya Kajiado",
+  "short_name": "Bus Radio",
+  "start_url": "/listen",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#E01B22",
+  "icons": [{ "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" }]
+}
