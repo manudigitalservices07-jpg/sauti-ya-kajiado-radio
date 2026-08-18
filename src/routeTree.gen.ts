@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ListenRouteImport } from './routes/listen'
+import { Route as NewsIndexRouteImport } from './routes/news.index'
+import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as ShowsIndexRouteImport } from './routes/shows.index'
 import { Route as ShowsSlugRouteImport } from './routes/shows.$slug'
 import { Route as ApiPublicChatRouteImport } from './routes/api/public/chat'
@@ -23,6 +25,16 @@ const IndexRoute = IndexRouteImport.update({
 const ListenRoute = ListenRouteImport.update({
   id: '/listen',
   path: '/listen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsIndexRoute = NewsIndexRouteImport.update({
+  id: '/news/',
+  path: '/news/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsSlugRoute = NewsSlugRouteImport.update({
+  id: '/news/$slug',
+  path: '/news/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShowsIndexRoute = ShowsIndexRouteImport.update({
@@ -44,14 +56,18 @@ const ApiPublicChatRoute = ApiPublicChatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/listen': typeof ListenRoute
+  '/news/$slug': typeof NewsSlugRoute
   '/shows/$slug': typeof ShowsSlugRoute
+  '/news/': typeof NewsIndexRoute
   '/shows/': typeof ShowsIndexRoute
   '/api/public/chat': typeof ApiPublicChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/listen': typeof ListenRoute
+  '/news/$slug': typeof NewsSlugRoute
   '/shows/$slug': typeof ShowsSlugRoute
+  '/news': typeof NewsIndexRoute
   '/shows': typeof ShowsIndexRoute
   '/api/public/chat': typeof ApiPublicChatRoute
 }
@@ -59,20 +75,38 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/listen': typeof ListenRoute
+  '/news/$slug': typeof NewsSlugRoute
   '/shows/$slug': typeof ShowsSlugRoute
+  '/news/': typeof NewsIndexRoute
   '/shows/': typeof ShowsIndexRoute
   '/api/public/chat': typeof ApiPublicChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/listen' | '/shows/$slug' | '/shows/' | '/api/public/chat'
+  fullPaths:
+    | '/'
+    | '/listen'
+    | '/news/$slug'
+    | '/shows/$slug'
+    | '/news/'
+    | '/shows/'
+    | '/api/public/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/listen' | '/shows/$slug' | '/shows' | '/api/public/chat'
+  to:
+    | '/'
+    | '/listen'
+    | '/news/$slug'
+    | '/shows/$slug'
+    | '/news'
+    | '/shows'
+    | '/api/public/chat'
   id:
     | '__root__'
     | '/'
     | '/listen'
+    | '/news/$slug'
     | '/shows/$slug'
+    | '/news/'
     | '/shows/'
     | '/api/public/chat'
   fileRoutesById: FileRoutesById
@@ -80,7 +114,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ListenRoute: typeof ListenRoute
+  NewsSlugRoute: typeof NewsSlugRoute
   ShowsSlugRoute: typeof ShowsSlugRoute
+  NewsIndexRoute: typeof NewsIndexRoute
   ShowsIndexRoute: typeof ShowsIndexRoute
   ApiPublicChatRoute: typeof ApiPublicChatRoute
 }
@@ -99,6 +135,20 @@ declare module '@tanstack/react-router' {
       path: '/listen'
       fullPath: '/listen'
       preLoaderRoute: typeof ListenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news/': {
+      id: '/news/'
+      path: '/news'
+      fullPath: '/news/'
+      preLoaderRoute: typeof NewsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news/$slug': {
+      id: '/news/$slug'
+      path: '/news/$slug'
+      fullPath: '/news/$slug'
+      preLoaderRoute: typeof NewsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shows/': {
@@ -128,7 +178,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ListenRoute: ListenRoute,
+  NewsSlugRoute: NewsSlugRoute,
   ShowsSlugRoute: ShowsSlugRoute,
+  NewsIndexRoute: NewsIndexRoute,
   ShowsIndexRoute: ShowsIndexRoute,
   ApiPublicChatRoute: ApiPublicChatRoute,
 }
