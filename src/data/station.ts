@@ -329,3 +329,32 @@ export const stats = [
   { value: "2015", label: "On air since" },
   { value: "100%", label: "Youth-run newsroom" },
 ];
+
+/** Positive station messages that scroll across the colour marquee. */
+export const stationMessages = [
+  "Sauti ya Kajiado — broadcasting live on 99.9 FM",
+  "Habari za Kaunti at 7AM, 1PM and 7PM daily",
+  "Report news from your ward — we will follow it up",
+  "Book a studio session or interview with our team",
+  "Youth-run newsroom · Kiswahili & Maa",
+  "Call the studio: +254 720 939088",
+  "Advertise with Kajiado's most trusted community voice",
+  "Join the Bus Radio community chat and talk to listeners",
+];
+
+export type GalleryVideo = { title: string; description: string; url: string; kind: "youtube" | "facebook" };
+
+export const galleryVideos: GalleryVideo[] = [
+  {
+    title: "Mahojiano Live — field interview",
+    description: "Our team out in the community recording a live interview for Bus Radio 99.9FM.",
+    url: "https://www.facebook.com/share/v/1EUY36jNjR/",
+    kind: "facebook",
+  },
+  {
+    title: "Bus Radio on the ground in Kajiado",
+    description: "Behind the scenes with the Bus Radio field reporting team.",
+    url: "https://www.facebook.com/share/v/1EaTu4uyAx/",
+    kind: "facebook",
+  },
+];

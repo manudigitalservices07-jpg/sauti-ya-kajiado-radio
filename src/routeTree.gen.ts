@@ -11,6 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ListenRouteImport } from './routes/listen'
+import { Route as NewsIndexRouteImport } from './routes/news.index'
+import { Route as NewsSlugRouteImport } from './routes/news.$slug'
+import { Route as ShowsIndexRouteImport } from './routes/shows.index'
+import { Route as ShowsSlugRouteImport } from './routes/shows.$slug'
+import { Route as ApiPublicChatRouteImport } from './routes/api/public/chat'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +27,98 @@ const ListenRoute = ListenRouteImport.update({
   path: '/listen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NewsIndexRoute = NewsIndexRouteImport.update({
+  id: '/news/',
+  path: '/news/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsSlugRoute = NewsSlugRouteImport.update({
+  id: '/news/$slug',
+  path: '/news/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShowsIndexRoute = ShowsIndexRouteImport.update({
+  id: '/shows/',
+  path: '/shows/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShowsSlugRoute = ShowsSlugRouteImport.update({
+  id: '/shows/$slug',
+  path: '/shows/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicChatRoute = ApiPublicChatRouteImport.update({
+  id: '/api/public/chat',
+  path: '/api/public/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/listen': typeof ListenRoute
+  '/news/$slug': typeof NewsSlugRoute
+  '/shows/$slug': typeof ShowsSlugRoute
+  '/news/': typeof NewsIndexRoute
+  '/shows/': typeof ShowsIndexRoute
+  '/api/public/chat': typeof ApiPublicChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/listen': typeof ListenRoute
+  '/news/$slug': typeof NewsSlugRoute
+  '/shows/$slug': typeof ShowsSlugRoute
+  '/news': typeof NewsIndexRoute
+  '/shows': typeof ShowsIndexRoute
+  '/api/public/chat': typeof ApiPublicChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/listen': typeof ListenRoute
+  '/news/$slug': typeof NewsSlugRoute
+  '/shows/$slug': typeof ShowsSlugRoute
+  '/news/': typeof NewsIndexRoute
+  '/shows/': typeof ShowsIndexRoute
+  '/api/public/chat': typeof ApiPublicChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/listen'
+  fullPaths:
+    | '/'
+    | '/listen'
+    | '/news/$slug'
+    | '/shows/$slug'
+    | '/news/'
+    | '/shows/'
+    | '/api/public/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/listen'
-  id: '__root__' | '/' | '/listen'
+  to:
+    | '/'
+    | '/listen'
+    | '/news/$slug'
+    | '/shows/$slug'
+    | '/news'
+    | '/shows'
+    | '/api/public/chat'
+  id:
+    | '__root__'
+    | '/'
+    | '/listen'
+    | '/news/$slug'
+    | '/shows/$slug'
+    | '/news/'
+    | '/shows/'
+    | '/api/public/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ListenRoute: typeof ListenRoute
+  NewsSlugRoute: typeof NewsSlugRoute
+  ShowsSlugRoute: typeof ShowsSlugRoute
+  NewsIndexRoute: typeof NewsIndexRoute
+  ShowsIndexRoute: typeof ShowsIndexRoute
+  ApiPublicChatRoute: typeof ApiPublicChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +137,52 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ListenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/news/': {
+      id: '/news/'
+      path: '/news'
+      fullPath: '/news/'
+      preLoaderRoute: typeof NewsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news/$slug': {
+      id: '/news/$slug'
+      path: '/news/$slug'
+      fullPath: '/news/$slug'
+      preLoaderRoute: typeof NewsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shows/': {
+      id: '/shows/'
+      path: '/shows'
+      fullPath: '/shows/'
+      preLoaderRoute: typeof ShowsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shows/$slug': {
+      id: '/shows/$slug'
+      path: '/shows/$slug'
+      fullPath: '/shows/$slug'
+      preLoaderRoute: typeof ShowsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/chat': {
+      id: '/api/public/chat'
+      path: '/api/public/chat'
+      fullPath: '/api/public/chat'
+      preLoaderRoute: typeof ApiPublicChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ListenRoute: ListenRoute,
+  NewsSlugRoute: NewsSlugRoute,
+  ShowsSlugRoute: ShowsSlugRoute,
+  NewsIndexRoute: NewsIndexRoute,
+  ShowsIndexRoute: ShowsIndexRoute,
+  ApiPublicChatRoute: ApiPublicChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

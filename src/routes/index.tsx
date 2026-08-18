@@ -91,7 +91,7 @@ function Home() {
               className="w-72 shrink-0 snap-start overflow-hidden rounded-2xl border border-border bg-card transition hover:-translate-y-1 hover:shadow-xl md:w-auto"
             >
               {s.image && (
-                <img src={s.image} alt={s.name} loading="lazy" className="h-40 w-full object-cover" />
+                <img src={s.image} alt={s.name} loading="lazy" className="h-40 w-full object-cover object-top" />
               )}
               <div className="p-5">
                 <span className="text-[11px] font-bold uppercase tracking-widest text-primary">{s.category}</span>
