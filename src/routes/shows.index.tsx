@@ -4,7 +4,7 @@ import { Clock, Radio } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { showCategories, shows } from "@/data/station";
 
-export const Route = createFileRoute("/shows")({
+export const Route = createFileRoute("/shows/")({
   head: () => ({
     meta: [
       { title: "Shows & Schedule — Bus Radio 99.9FM Kajiado" },
