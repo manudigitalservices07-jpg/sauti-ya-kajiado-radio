@@ -10,7 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ListenRouteImport } from './routes/listen'
+import { Route as PresentersRouteImport } from './routes/presenters'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as ShowsIndexRouteImport } from './routes/shows.index'
@@ -22,9 +25,24 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ListenRoute = ListenRouteImport.update({
   id: '/listen',
   path: '/listen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PresentersRoute = PresentersRouteImport.update({
+  id: '/presenters',
+  path: '/presenters',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsIndexRoute = NewsIndexRouteImport.update({
@@ -55,7 +73,10 @@ const ApiPublicChatRoute = ApiPublicChatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/gallery': typeof GalleryRoute
   '/listen': typeof ListenRoute
+  '/presenters': typeof PresentersRoute
   '/news/$slug': typeof NewsSlugRoute
   '/shows/$slug': typeof ShowsSlugRoute
   '/news/': typeof NewsIndexRoute
@@ -64,7 +85,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/gallery': typeof GalleryRoute
   '/listen': typeof ListenRoute
+  '/presenters': typeof PresentersRoute
   '/news/$slug': typeof NewsSlugRoute
   '/shows/$slug': typeof ShowsSlugRoute
   '/news': typeof NewsIndexRoute
@@ -74,7 +98,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/gallery': typeof GalleryRoute
   '/listen': typeof ListenRoute
+  '/presenters': typeof PresentersRoute
   '/news/$slug': typeof NewsSlugRoute
   '/shows/$slug': typeof ShowsSlugRoute
   '/news/': typeof NewsIndexRoute
@@ -85,7 +112,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/gallery'
     | '/listen'
+    | '/presenters'
     | '/news/$slug'
     | '/shows/$slug'
     | '/news/'
@@ -94,7 +124,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
+    | '/gallery'
     | '/listen'
+    | '/presenters'
     | '/news/$slug'
     | '/shows/$slug'
     | '/news'
@@ -103,7 +136,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/gallery'
     | '/listen'
+    | '/presenters'
     | '/news/$slug'
     | '/shows/$slug'
     | '/news/'
@@ -113,7 +149,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  GalleryRoute: typeof GalleryRoute
   ListenRoute: typeof ListenRoute
+  PresentersRoute: typeof PresentersRoute
   NewsSlugRoute: typeof NewsSlugRoute
   ShowsSlugRoute: typeof ShowsSlugRoute
   NewsIndexRoute: typeof NewsIndexRoute
@@ -130,11 +169,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/listen': {
       id: '/listen'
       path: '/listen'
       fullPath: '/listen'
       preLoaderRoute: typeof ListenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/presenters': {
+      id: '/presenters'
+      path: '/presenters'
+      fullPath: '/presenters'
+      preLoaderRoute: typeof PresentersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news/': {
@@ -177,7 +237,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  GalleryRoute: GalleryRoute,
   ListenRoute: ListenRoute,
+  PresentersRoute: PresentersRoute,
   NewsSlugRoute: NewsSlugRoute,
   ShowsSlugRoute: ShowsSlugRoute,
   NewsIndexRoute: NewsIndexRoute,
