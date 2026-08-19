@@ -11,9 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as BookRouteImport } from './routes/book'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ListenRouteImport } from './routes/listen'
 import { Route as PresentersRouteImport } from './routes/presenters'
+import { Route as SupportRouteImport } from './routes/support'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as ShowsIndexRouteImport } from './routes/shows.index'
@@ -30,6 +33,16 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
@@ -43,6 +56,11 @@ const ListenRoute = ListenRouteImport.update({
 const PresentersRoute = PresentersRouteImport.update({
   id: '/presenters',
   path: '/presenters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsIndexRoute = NewsIndexRouteImport.update({
@@ -74,9 +92,12 @@ const ApiPublicChatRoute = ApiPublicChatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/book': typeof BookRoute
+  '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/listen': typeof ListenRoute
   '/presenters': typeof PresentersRoute
+  '/support': typeof SupportRoute
   '/news/$slug': typeof NewsSlugRoute
   '/shows/$slug': typeof ShowsSlugRoute
   '/news/': typeof NewsIndexRoute
@@ -86,9 +107,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/book': typeof BookRoute
+  '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/listen': typeof ListenRoute
   '/presenters': typeof PresentersRoute
+  '/support': typeof SupportRoute
   '/news/$slug': typeof NewsSlugRoute
   '/shows/$slug': typeof ShowsSlugRoute
   '/news': typeof NewsIndexRoute
@@ -99,9 +123,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/book': typeof BookRoute
+  '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/listen': typeof ListenRoute
   '/presenters': typeof PresentersRoute
+  '/support': typeof SupportRoute
   '/news/$slug': typeof NewsSlugRoute
   '/shows/$slug': typeof ShowsSlugRoute
   '/news/': typeof NewsIndexRoute
@@ -113,9 +140,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/book'
+    | '/contact'
     | '/gallery'
     | '/listen'
     | '/presenters'
+    | '/support'
     | '/news/$slug'
     | '/shows/$slug'
     | '/news/'
@@ -125,9 +155,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/book'
+    | '/contact'
     | '/gallery'
     | '/listen'
     | '/presenters'
+    | '/support'
     | '/news/$slug'
     | '/shows/$slug'
     | '/news'
@@ -137,9 +170,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/book'
+    | '/contact'
     | '/gallery'
     | '/listen'
     | '/presenters'
+    | '/support'
     | '/news/$slug'
     | '/shows/$slug'
     | '/news/'
@@ -150,9 +186,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BookRoute: typeof BookRoute
+  ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
   ListenRoute: typeof ListenRoute
   PresentersRoute: typeof PresentersRoute
+  SupportRoute: typeof SupportRoute
   NewsSlugRoute: typeof NewsSlugRoute
   ShowsSlugRoute: typeof ShowsSlugRoute
   NewsIndexRoute: typeof NewsIndexRoute
@@ -176,6 +215,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
@@ -195,6 +248,13 @@ declare module '@tanstack/react-router' {
       path: '/presenters'
       fullPath: '/presenters'
       preLoaderRoute: typeof PresentersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news/': {
@@ -238,9 +298,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BookRoute: BookRoute,
+  ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
   ListenRoute: ListenRoute,
   PresentersRoute: PresentersRoute,
+  SupportRoute: SupportRoute,
   NewsSlugRoute: NewsSlugRoute,
   ShowsSlugRoute: ShowsSlugRoute,
   NewsIndexRoute: NewsIndexRoute,
