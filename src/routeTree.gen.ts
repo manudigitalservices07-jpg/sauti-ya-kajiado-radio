@@ -11,11 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BookRouteImport } from './routes/book'
+import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ListenRouteImport } from './routes/listen'
 import { Route as PresentersRouteImport } from './routes/presenters'
+import { Route as ReportRouteImport } from './routes/report'
 import { Route as SupportRouteImport } from './routes/support'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as NewsSlugRouteImport } from './routes/news.$slug'
@@ -33,9 +36,19 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BookRoute = BookRouteImport.update({
   id: '/book',
   path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -56,6 +69,11 @@ const ListenRoute = ListenRouteImport.update({
 const PresentersRoute = PresentersRouteImport.update({
   id: '/presenters',
   path: '/presenters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportRoute = ReportRouteImport.update({
+  id: '/report',
+  path: '/report',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SupportRoute = SupportRouteImport.update({
@@ -92,11 +110,14 @@ const ApiPublicChatRoute = ApiPublicChatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/book': typeof BookRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/listen': typeof ListenRoute
   '/presenters': typeof PresentersRoute
+  '/report': typeof ReportRoute
   '/support': typeof SupportRoute
   '/news/$slug': typeof NewsSlugRoute
   '/shows/$slug': typeof ShowsSlugRoute
@@ -107,11 +128,14 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/book': typeof BookRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/listen': typeof ListenRoute
   '/presenters': typeof PresentersRoute
+  '/report': typeof ReportRoute
   '/support': typeof SupportRoute
   '/news/$slug': typeof NewsSlugRoute
   '/shows/$slug': typeof ShowsSlugRoute
@@ -123,11 +147,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/book': typeof BookRoute
+  '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/listen': typeof ListenRoute
   '/presenters': typeof PresentersRoute
+  '/report': typeof ReportRoute
   '/support': typeof SupportRoute
   '/news/$slug': typeof NewsSlugRoute
   '/shows/$slug': typeof ShowsSlugRoute
@@ -140,11 +167,14 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/auth'
     | '/book'
+    | '/community'
     | '/contact'
     | '/gallery'
     | '/listen'
     | '/presenters'
+    | '/report'
     | '/support'
     | '/news/$slug'
     | '/shows/$slug'
@@ -155,11 +185,14 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/auth'
     | '/book'
+    | '/community'
     | '/contact'
     | '/gallery'
     | '/listen'
     | '/presenters'
+    | '/report'
     | '/support'
     | '/news/$slug'
     | '/shows/$slug'
@@ -170,11 +203,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/auth'
     | '/book'
+    | '/community'
     | '/contact'
     | '/gallery'
     | '/listen'
     | '/presenters'
+    | '/report'
     | '/support'
     | '/news/$slug'
     | '/shows/$slug'
@@ -186,11 +222,14 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
   BookRoute: typeof BookRoute
+  CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
   ListenRoute: typeof ListenRoute
   PresentersRoute: typeof PresentersRoute
+  ReportRoute: typeof ReportRoute
   SupportRoute: typeof SupportRoute
   NewsSlugRoute: typeof NewsSlugRoute
   ShowsSlugRoute: typeof ShowsSlugRoute
@@ -215,11 +254,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/book': {
       id: '/book'
       path: '/book'
       fullPath: '/book'
       preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -248,6 +301,13 @@ declare module '@tanstack/react-router' {
       path: '/presenters'
       fullPath: '/presenters'
       preLoaderRoute: typeof PresentersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report': {
+      id: '/report'
+      path: '/report'
+      fullPath: '/report'
+      preLoaderRoute: typeof ReportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/support': {
@@ -298,11 +358,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
   BookRoute: BookRoute,
+  CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
   ListenRoute: ListenRoute,
   PresentersRoute: PresentersRoute,
+  ReportRoute: ReportRoute,
   SupportRoute: SupportRoute,
   NewsSlugRoute: NewsSlugRoute,
   ShowsSlugRoute: ShowsSlugRoute,
