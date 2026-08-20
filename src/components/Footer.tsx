@@ -62,6 +62,23 @@ export function Footer() {
           <p>Privacy Policy · Terms of Use</p>
         </div>
       </div>
+
+      <div className="border-t border-white/10 bg-black/30">
+        <div className="container-x flex flex-col gap-1 py-5 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {new Date().getFullYear()}{" "}
+            <a href="https://euspansolutions.co.ke" target="_blank" rel="noreferrer" className="font-semibold text-white hover:text-primary">
+              Euspan Solutions
+            </a>{" "}
+            · euspansolutions.co.ke. All rights reserved.
+          </p>
+          <p>
+            Developed by Emmanuel Ndunda — Website Developer, Euspan Solutions · Best ICT &amp; Digital Providers ·{" "}
+            <a href="tel:+254769722940" className="font-semibold text-white hover:text-primary">0769 722 940</a>
+          </p>
+        </div>
+      </div>
+
     </footer>
   );
 }

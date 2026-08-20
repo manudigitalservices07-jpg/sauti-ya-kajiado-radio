@@ -168,16 +168,29 @@ function Home() {
       <section className="container-x py-16">
         <SectionHead kicker="Watch & follow" title="Bus Radio on video" action={{ to: "/gallery", label: "Gallery" }} />
         <div className="mt-8 grid gap-6 md:grid-cols-2">
-          <div className="aspect-video overflow-hidden rounded-2xl border border-border">
-            <iframe
-              className="size-full"
-              src="https://www.youtube.com/embed?listType=user_uploads&list=BusRadioKajiado254"
-              title="Bus Radio Kajiado YouTube channel"
+          <a
+            href={station.youtube}
+            target="_blank"
+            rel="noreferrer"
+            className="group relative block aspect-video overflow-hidden rounded-2xl border border-border"
+          >
+            <img
+              src={images.field}
+              alt="Bus Radio field team filming an interview in Kajiado"
               loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
-              allowFullScreen
+              className="size-full object-cover transition duration-500 group-hover:scale-105"
             />
-          </div>
+            <span className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent" />
+            <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-center">
+              <span className="grid size-16 place-items-center rounded-full bg-primary text-primary-foreground shadow-lg transition group-hover:scale-110">
+                <Play className="size-7" aria-hidden="true" />
+              </span>
+              <span className="px-6 text-sm font-bold uppercase tracking-widest text-white">
+                Watch on our YouTube channel
+              </span>
+            </span>
+          </a>
+
           <div className="flex flex-col justify-center gap-4 rounded-2xl border border-border bg-card p-8">
             <h3 className="text-2xl">Join the conversation</h3>
             <p className="text-muted-foreground">
