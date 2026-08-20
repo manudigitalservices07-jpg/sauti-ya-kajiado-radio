@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { Clock, Radio } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
-import { showCategories, shows } from "@/data/station";
+import { images, showCategories, shows } from "@/data/station";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/shows/")({
   head: () => ({
@@ -20,9 +22,50 @@ export const Route = createFileRoute("/shows/")({
   component: ShowsPage,
 });
 
+type ShowCard = {
+  slug: string;
+  name: string;
+  category: string;
+  host: string;
+  days: string;
+  time: string;
+  language: string;
+  description: string;
+  image?: string;
+};
+
 function ShowsPage() {
   const [cat, setCat] = useState<string>("All");
-  const list = useMemo(() => (cat === "All" ? shows : shows.filter((s) => s.category === cat)), [cat]);
+
+  const { data: dbShows } = useQuery({
+    queryKey: ["show-posts"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("show_posts")
+        .select("slug,name,category,host,days,time_slot,language,description,image_url")
+        .eq("published", true)
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+
+  const list = useMemo<ShowCard[]>(() => {
+    const fromDb: ShowCard[] = (dbShows ?? []).map((s) => ({
+      slug: s.slug,
+      name: s.name,
+      category: s.category,
+      host: s.host,
+      days: s.days,
+      time: s.time_slot,
+      language: s.language,
+      description: s.description,
+      image: s.image_url ?? undefined,
+    }));
+    const seen = new Set(fromDb.map((s) => s.slug));
+    const merged = [...fromDb, ...shows.filter((s) => !seen.has(s.slug))];
+    return cat === "All" ? merged : merged.filter((s) => s.category === cat);
+  }, [dbShows, cat]);
 
   return (
     <>
@@ -57,9 +100,9 @@ function ShowsPage() {
               params={{ slug: s.slug }}
               className="group overflow-hidden rounded-2xl border border-border bg-card transition hover:-translate-y-1 hover:shadow-lg"
             >
-              {s.image && (
+              {(s.image || images.studio) && (
                 <img
-                  src={s.image}
+                  src={s.image || images.studio}
                   alt={s.name}
                   loading="lazy"
                   className="h-48 w-full object-cover object-top transition group-hover:scale-[1.02]"
@@ -81,6 +124,7 @@ function ShowsPage() {
             </Link>
           ))}
         </div>
+        {list.length === 0 && <p className="mt-10 text-muted-foreground">No shows in this category yet.</p>}
       </section>
     </>
   );
