@@ -175,7 +175,7 @@ function Home() {
             className="group relative block aspect-video overflow-hidden rounded-2xl border border-border"
           >
             <img
-              src={images.field}
+              src={images.fieldTeam}
               alt="Bus Radio field team filming an interview in Kajiado"
               loading="lazy"
               className="size-full object-cover transition duration-500 group-hover:scale-105"
