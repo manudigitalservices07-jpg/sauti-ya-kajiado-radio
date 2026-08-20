@@ -31,7 +31,7 @@ type ShowCard = {
   time: string;
   language: string;
   description: string;
-  image?: string;
+  image: string | undefined;
 };
 
 function ShowsPage() {
