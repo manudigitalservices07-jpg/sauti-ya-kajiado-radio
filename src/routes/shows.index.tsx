@@ -63,7 +63,20 @@ function ShowsPage() {
       image: s.image_url ?? undefined,
     }));
     const seen = new Set(fromDb.map((s) => s.slug));
-    const merged = [...fromDb, ...shows.filter((s) => !seen.has(s.slug))];
+    const fromStatic: ShowCard[] = shows
+      .filter((s) => !seen.has(s.slug))
+      .map((s) => ({
+        slug: s.slug,
+        name: s.name,
+        category: s.category,
+        host: s.host,
+        days: s.days,
+        time: s.time,
+        language: s.language,
+        description: s.description,
+        image: s.image,
+      }));
+    const merged = [...fromDb, ...fromStatic];
     return cat === "All" ? merged : merged.filter((s) => s.category === cat);
   }, [dbShows, cat]);
 
