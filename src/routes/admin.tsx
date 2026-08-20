@@ -446,7 +446,7 @@ function NewsPanel() {
   const [rows, setRows] = useState<{ id: string; slug: string; title: string; category: string; published: boolean; created_at: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState(newsCats[0]);
+  const [category, setCategory] = useState<string>(newsCats[0] ?? "County News");
   const [excerpt, setExcerpt] = useState("");
   const [body, setBody] = useState("");
   const [image_url, setImageUrl] = useState("");
@@ -578,7 +578,7 @@ function ShowsPanel() {
   const [host, setHost] = useState("");
   const [days, setDays] = useState("");
   const [time_slot, setTimeSlot] = useState("");
-  const [category, setCategory] = useState(showCats[0]);
+  const [category, setCategory] = useState<string>(showCats[0] ?? "Talk Shows");
   const [language, setLanguage] = useState("Kiswahili & Maa");
   const [description, setDescription] = useState("");
   const [image_url, setImageUrl] = useState("");
@@ -739,7 +739,8 @@ function LivePanel() {
   }
 
   async function toggleField(id: string, field: "is_live" | "published", val: boolean) {
-    await supabase.from("live_links").update({ [field]: !val }).eq("id", id);
+    const patch = field === "is_live" ? { is_live: !val } : { published: !val };
+    await supabase.from("live_links").update(patch).eq("id", id);
     qc.invalidateQueries({ queryKey: ["live-links"] });
     void load();
   }
