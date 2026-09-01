@@ -155,7 +155,11 @@ export function Navbar() {
                 Support Us
               </Link>
             </li>
+            <li className="px-3 py-2">
+              <AuthNav onNavigate={() => setOpen(false)} />
+            </li>
           </ul>
+
         </div>
       )}
     </header>
