@@ -102,6 +102,26 @@ function AdminPage() {
   );
 }
 
+function SignOutButton() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  return (
+    <button
+      type="button"
+      onClick={async () => {
+        await queryClient.cancelQueries();
+        queryClient.clear();
+        await supabase.auth.signOut();
+        void navigate({ to: "/auth", replace: true });
+      }}
+      className="text-sm font-semibold text-muted-foreground hover:text-foreground"
+    >
+      Sign out
+    </button>
+  );
+}
+
+
 /* ---------------- Overview ---------------- */
 
 function Overview({ onJump }: { onJump: (t: Tab) => void }) {
