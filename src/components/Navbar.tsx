@@ -106,6 +106,10 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
+          <div className="hidden lg:block">
+            <AuthNav />
+          </div>
+
           <button
             type="button"
             onClick={play}
