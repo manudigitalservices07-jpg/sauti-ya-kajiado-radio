@@ -70,9 +70,8 @@ function AdminPage() {
           <span className="text-xs font-bold uppercase tracking-widest text-primary">Admin</span>
           <h1 className="mt-1 text-3xl md:text-4xl">Station dashboard</h1>
         </div>
-        <Link to="/auth" className="text-sm font-semibold text-muted-foreground hover:text-foreground">
-          Sign out
-        </Link>
+        <SignOutButton />
+
       </div>
 
       <nav className="mt-6 flex flex-wrap gap-2 border-b border-border pb-3">
