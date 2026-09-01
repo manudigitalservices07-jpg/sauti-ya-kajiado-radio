@@ -1,9 +1,13 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { Menu, Radio, X } from "lucide-react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { LogIn, Menu, Radio, ShieldCheck, X } from "lucide-react";
 import { images, station } from "@/data/station";
 import { LiveClockWeather } from "@/components/LiveClock";
 import { usePlayer } from "@/components/player/PlayerProvider";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+
 
 const links = [
   { to: "/", label: "Home" },
