@@ -70,9 +70,8 @@ function AdminPage() {
           <span className="text-xs font-bold uppercase tracking-widest text-primary">Admin</span>
           <h1 className="mt-1 text-3xl md:text-4xl">Station dashboard</h1>
         </div>
-        <Link to="/auth" className="text-sm font-semibold text-muted-foreground hover:text-foreground">
-          Sign out
-        </Link>
+        <SignOutButton />
+
       </div>
 
       <nav className="mt-6 flex flex-wrap gap-2 border-b border-border pb-3">
@@ -102,6 +101,26 @@ function AdminPage() {
     </section>
   );
 }
+
+function SignOutButton() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  return (
+    <button
+      type="button"
+      onClick={async () => {
+        await queryClient.cancelQueries();
+        queryClient.clear();
+        await supabase.auth.signOut();
+        void navigate({ to: "/auth", replace: true });
+      }}
+      className="text-sm font-semibold text-muted-foreground hover:text-foreground"
+    >
+      Sign out
+    </button>
+  );
+}
+
 
 /* ---------------- Overview ---------------- */
 
