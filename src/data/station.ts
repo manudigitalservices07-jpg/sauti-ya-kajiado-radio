@@ -1,24 +1,19 @@
-import logo from "@/assets/image.png.asset.json";
-import studio from "@/assets/image-2.png.asset.json";
-import jukwaaSiasa from "@/assets/image-3.png.asset.json";
-import jukwaaKaziBadge from "@/assets/image-4.png.asset.json";
-import fieldTeam from "@/assets/image-5.png.asset.json";
-import presenterMic from "@/assets/image-6.png.asset.json";
-import qwetuAfrika from "@/assets/image-7.png.asset.json";
-import farajaShow from "@/assets/image-8.png.asset.json";
-import jukwaaKazi from "@/assets/image-9.png.asset.json";
-
+/**
+ * Station artwork is served from /public/media so the images work on every host
+ * (Lovable preview, published site, Vercel or any static deploy).
+ */
 export const images = {
-  logo: logo.url,
-  studio: studio.url,
-  jukwaaSiasa: jukwaaSiasa.url,
-  jukwaaKaziBadge: jukwaaKaziBadge.url,
-  fieldTeam: fieldTeam.url,
-  presenterMic: presenterMic.url,
-  qwetuAfrika: qwetuAfrika.url,
-  farajaShow: farajaShow.url,
-  jukwaaKazi: jukwaaKazi.url,
+  logo: "/media/image.png",
+  studio: "/media/image-2.png",
+  jukwaaSiasa: "/media/image-3.png",
+  jukwaaKaziBadge: "/media/image-4.png",
+  fieldTeam: "/media/image-5.png",
+  presenterMic: "/media/image-6.png",
+  qwetuAfrika: "/media/image-7.png",
+  farajaShow: "/media/image-8.png",
+  jukwaaKazi: "/media/image-9.png",
 };
+
 
 export const station = {
   name: "Bus Radio 99.9FM",
