@@ -59,7 +59,9 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col gap-2 py-5 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Bus Radio 99.9FM · Sauti ya Kajiado. All rights reserved.</p>
-          <p>Privacy Policy · Terms of Use</p>
+          <p>
+            <Link to="/digital-partner" className="hover:text-white">Digital Partner</Link> · Privacy Policy · Terms of Use
+          </p>
         </div>
       </div>
 

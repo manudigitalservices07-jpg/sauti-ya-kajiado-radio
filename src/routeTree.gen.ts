@@ -16,6 +16,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DigitalPartnerRouteImport } from './routes/digital-partner'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ListenRouteImport } from './routes/listen'
 import { Route as PresentersRouteImport } from './routes/presenters'
@@ -60,6 +61,11 @@ const CommunityRoute = CommunityRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DigitalPartnerRoute = DigitalPartnerRouteImport.update({
+  id: '/digital-partner',
+  path: '/digital-partner',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -121,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/book': typeof BookRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/digital-partner': typeof DigitalPartnerRoute
   '/gallery': typeof GalleryRoute
   '/listen': typeof ListenRoute
   '/presenters': typeof PresentersRoute
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/book': typeof BookRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/digital-partner': typeof DigitalPartnerRoute
   '/gallery': typeof GalleryRoute
   '/listen': typeof ListenRoute
   '/presenters': typeof PresentersRoute
@@ -160,6 +168,7 @@ export interface FileRoutesById {
   '/book': typeof BookRoute
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
+  '/digital-partner': typeof DigitalPartnerRoute
   '/gallery': typeof GalleryRoute
   '/listen': typeof ListenRoute
   '/presenters': typeof PresentersRoute
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
     | '/book'
     | '/community'
     | '/contact'
+    | '/digital-partner'
     | '/gallery'
     | '/listen'
     | '/presenters'
@@ -200,6 +210,7 @@ export interface FileRouteTypes {
     | '/book'
     | '/community'
     | '/contact'
+    | '/digital-partner'
     | '/gallery'
     | '/listen'
     | '/presenters'
@@ -219,6 +230,7 @@ export interface FileRouteTypes {
     | '/book'
     | '/community'
     | '/contact'
+    | '/digital-partner'
     | '/gallery'
     | '/listen'
     | '/presenters'
@@ -239,6 +251,7 @@ export interface RootRouteChildren {
   BookRoute: typeof BookRoute
   CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
+  DigitalPartnerRoute: typeof DigitalPartnerRoute
   GalleryRoute: typeof GalleryRoute
   ListenRoute: typeof ListenRoute
   PresentersRoute: typeof PresentersRoute
@@ -300,6 +313,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/digital-partner': {
+      id: '/digital-partner'
+      path: '/digital-partner'
+      fullPath: '/digital-partner'
+      preLoaderRoute: typeof DigitalPartnerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -383,6 +403,7 @@ const rootRouteChildren: RootRouteChildren = {
   BookRoute: BookRoute,
   CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
+  DigitalPartnerRoute: DigitalPartnerRoute,
   GalleryRoute: GalleryRoute,
   ListenRoute: ListenRoute,
   PresentersRoute: PresentersRoute,
