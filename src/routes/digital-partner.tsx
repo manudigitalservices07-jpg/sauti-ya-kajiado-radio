@@ -64,7 +64,19 @@ function DigitalPartnerPage() {
         description="This website was proudly designed and developed by Euspan Solutions — Kenya's best ICT & digital providers, led by Emmanuel Ndunda (Developer/CEO)."
       />
 
+      <section className="container-x -mt-6 flex justify-center">
+        <img
+          src="/media/euspan-logo.png"
+          alt="Euspan Solutions — Tech Company logo"
+          width={160}
+          height={160}
+          loading="lazy"
+          className="size-36 rounded-full bg-white object-contain p-2 shadow-xl sm:size-44"
+        />
+      </section>
+
       {/* Services */}
+
       <section className="container-x py-14">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s) => (
