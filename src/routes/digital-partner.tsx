@@ -197,7 +197,7 @@ function DigitalPartnerPage() {
       <section className="container-x py-14">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {t.services.map(([title, desc], i) => {
-            const Icon = icons[i];
+            const Icon = icons[i] ?? Globe;
             return (
               <article key={i} className="group rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary hover:shadow-xl">
                 <span className="grid size-12 place-items-center rounded-xl bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-primary-foreground">
@@ -256,7 +256,7 @@ function DigitalPartnerPage() {
                 {t.service}
                 <select className={`${input} mt-1`} value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })}>
                   {T.en.services.map(([s], i) => (
-                    <option key={s} value={s} className="text-foreground">{t.services[i][0]}</option>
+                    <option key={s} value={s} className="text-foreground">{t.services[i]?.[0] ?? s}</option>
                   ))}
                 </select>
               </label>
